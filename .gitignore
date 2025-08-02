@@ -1,0 +1,4 @@
+src/*.gch
+src/*.o
+testing/*.o
+testing/randomizer
