@@ -1,4 +1,5 @@
+res
 src/*.gch
 src/*.o
 testing/*.o
-testing/randomizer
+bin
