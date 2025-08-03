@@ -6,6 +6,8 @@ Randomizer* Randomizer::rnd_ptr = nullptr;
 int main(){
     Randomizer* rnd = Randomizer::Randomizer_get_instance(1);
     if(rnd == nullptr){
+        printf("Could not initialize Randomizer object.\n");
+        return -1;
     }
 
     for(size_t i = 0; i < 20; i++){
