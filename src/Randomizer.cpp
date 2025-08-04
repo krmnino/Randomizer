@@ -24,13 +24,19 @@ void Randomizer::root_seed_prev(){
     this->branching_seed = c11_minstd_backwards(this->root_seed);
 }
 
-std::string Randomizer::gen_random_string(size_t length){
-    const char* ascii_chars = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+std::string Randomizer::gen_random_string(size_t out_str_length, const char* dictionary){
+    if(out_str_length == 0 || strlen(dictionary) == 0){
+        return "";
+    }
     std::stringstream buffer;
-    for(uint32_t i = 0; i < length; i++){
-        buffer << (char)ascii_chars[this->gen_random_integral_range<size_t>(0, strlen(ascii_chars) - 1)];
+    for(uint32_t i = 0; i < out_str_length; i++){
+        buffer << (char)dictionary[this->gen_random_integral_range<size_t>(0, strlen(dictionary) - 1)];
     }
     return buffer.str();
+}
+
+std::string Randomizer::gen_random_string(size_t out_str_length, std::string& dictionary){
+    return this->gen_random_string(out_str_length, dictionary.c_str());
 }
 
 double Randomizer::gen_double_not_nan(){

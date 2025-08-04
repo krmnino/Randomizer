@@ -33,7 +33,8 @@ class Randomizer{
 
     void root_seed_next();
     void root_seed_prev();
-    std::string gen_random_string(size_t);
+    std::string gen_random_string(size_t, const char*);
+    std::string gen_random_string(size_t, std::string&);
     double gen_double_not_nan();
     double gen_double_not_nan_range(double, double);
 

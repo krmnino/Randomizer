@@ -4,6 +4,9 @@
 Randomizer* Randomizer::rnd_ptr = nullptr;
 
 int main(){
+    std::string ascii_chars = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    std::string alphanum_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
     Randomizer* rnd = Randomizer::get_instance(1);
     if(rnd == nullptr){
         printf("Could not initialize Randomizer object.\n");
@@ -37,8 +40,23 @@ int main(){
     }
 
     for(size_t i = 0; i < 20; i++){
-        size_t str_len = rnd->gen_random_integral_range<uint32_t>(0, 200);
-        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, str_len, rnd->gen_random_string(str_len).c_str());
+        size_t out_str_len = rnd->gen_random_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_random_string(out_str_len, ascii_chars).c_str());
+    }
+
+    for(size_t i = 0; i < 20; i++){
+        size_t out_str_len = rnd->gen_random_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_random_string(out_str_len, alphanum_chars).c_str());
+    }
+
+    for(size_t i = 0; i < 20; i++){
+        size_t out_str_len = rnd->gen_random_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_random_string(out_str_len, ascii_chars.c_str()).c_str());
+    }
+
+    for(size_t i = 0; i < 20; i++){
+        size_t out_str_len = rnd->gen_random_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_random_string(out_str_len, alphanum_chars.c_str()).c_str());
     }
     
     for(size_t i = 0; i < 20; i++){
