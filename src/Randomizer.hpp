@@ -18,7 +18,7 @@ class Randomizer{
     uint32_t c11_minstd_backwards(uint32_t);
     
     public:
-    static Randomizer* Randomizer_get_instance(uint32_t input_seed){
+    static Randomizer* get_instance(uint32_t input_seed){
         if(rnd_ptr == nullptr){
             rnd_ptr = new Randomizer();
         }
@@ -27,7 +27,7 @@ class Randomizer{
         return rnd_ptr;
     } 
 
-    static void Randomizer_end_instance(){
+    static void end_instance(){
         delete rnd_ptr;
     }
 

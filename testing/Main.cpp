@@ -4,7 +4,7 @@
 Randomizer* Randomizer::rnd_ptr = nullptr;
 
 int main(){
-    Randomizer* rnd = Randomizer::Randomizer_get_instance(1);
+    Randomizer* rnd = Randomizer::get_instance(1);
     if(rnd == nullptr){
         printf("Could not initialize Randomizer object.\n");
         return -1;
@@ -49,5 +49,6 @@ int main(){
         printf("Pseudorandom range double #%ld -> %lf\n", i + 1, rnd->gen_double_not_nan_range(1.0, 2.0));
     }
 
+    Randomizer::end_instance();
     return 0;
 }
