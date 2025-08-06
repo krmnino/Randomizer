@@ -24,19 +24,24 @@ void Randomizer::root_seed_prev(){
     this->branching_seed = c11_minstd_backwards(this->root_seed);
 }
 
-std::string Randomizer::gen_random_string(size_t out_str_length, const char* dictionary){
-    if(out_str_length == 0 || strlen(dictionary) == 0){
-        return "";
+bool Randomizer::gen_bool(){
+    return (this->gen_integral_range<uint8_t>(0, 1) == 0) ? false : true;
+}
+
+std::string Randomizer::gen_string(size_t out_str_length, const char* dictionary){
+    const char* default_ascii_dict =  "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    if(dictionary == nullptr || out_str_length == 0 || strlen(dictionary) == 0){
+        dictionary = default_ascii_dict;
     }
     std::stringstream buffer;
     for(uint32_t i = 0; i < out_str_length; i++){
-        buffer << (char)dictionary[this->gen_random_integral_range<size_t>(0, strlen(dictionary) - 1)];
+        buffer << (char)dictionary[this->gen_integral_range<size_t>(0, strlen(dictionary) - 1)];
     }
     return buffer.str();
 }
 
-std::string Randomizer::gen_random_string(size_t out_str_length, std::string& dictionary){
-    return this->gen_random_string(out_str_length, dictionary.c_str());
+std::string Randomizer::gen_string(size_t out_str_length, std::string& dictionary){
+    return this->gen_string(out_str_length, dictionary.c_str());
 }
 
 double Randomizer::gen_double_not_nan(){
@@ -47,7 +52,7 @@ double Randomizer::gen_double_not_nan(){
     } buff;
     while (true){
         for(size_t i = sizeof(double); i > 0; i--){
-            buff.rand_buff_u8[i - 1] = this->gen_random_integral_range<uint8_t>(0x0, 0xFF);
+            buff.rand_buff_u8[i - 1] = this->gen_integral_range<uint8_t>(0x0, 0xFF);
         }
         // Prevent NaN and infinity results
         if((buff.rand_buff_u64 & 0x7FF0000000000000) != 0x7FF0000000000000){
