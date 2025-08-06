@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <cstring>
 #include <sstream>
-
+#include <iostream>
 class Randomizer{
     private:
     uint32_t root_seed;
@@ -33,12 +33,13 @@ class Randomizer{
 
     void root_seed_next();
     void root_seed_prev();
-    std::string gen_random_string(size_t, const char*);
-    std::string gen_random_string(size_t, std::string&);
+    bool gen_bool();
+    std::string gen_string(size_t, const char*);
+    std::string gen_string(size_t, std::string&);
     double gen_double_not_nan();
     double gen_double_not_nan_range(double, double);
 
-    template<typename T> T gen_random_integral(){
+    template<typename T> T gen_integral(){
         size_t input_size = sizeof(T);
         T accumulator = 0;
         uint8_t random_byte;
@@ -52,7 +53,7 @@ class Randomizer{
         return accumulator;
     }
 
-    template<typename T> T gen_random_integral_range(T lower, T upper){
+    template<typename T> T gen_integral_range(T lower, T upper){
         size_t input_size = sizeof(T);
         T accumulator = 0;
         uint8_t random_byte;
