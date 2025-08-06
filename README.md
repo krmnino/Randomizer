@@ -21,6 +21,14 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ## Changelog
 
+### v1.1
+
+- Removed word `random` from generation method names.
+- Update method names for creating and ending Randomizer instances.
+- Updated `gen_string` generate an output string restricted to characters present in a `std::string` dictionary argument.
+- Added variation of `gen_string` to allow dictionary to be of type `const char*`.
+- Added `gen_bool` method.
+
 ### v1.0
 
 - Initial release.
