@@ -33,11 +33,14 @@ class Randomizer{
 
     void root_seed_next();
     void root_seed_prev();
+    uint32_t get_root_seed();
+    uint32_t get_branching_seed();
     bool gen_bool();
     std::string gen_string(size_t, const char*);
     std::string gen_string(size_t, std::string&);
     double gen_double_not_nan();
     double gen_double_not_nan_range(double, double);
+    int shuffle(void*, size_t, size_t);
 
     template<typename T> T gen_integral(){
         size_t input_size = sizeof(T);
