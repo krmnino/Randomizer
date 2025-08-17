@@ -1,13 +1,19 @@
-RD = "../res/"
 BD = "../bin/"
+SD = "../src/"
+
+SRC_FILES = $(SD)Randomizer.cpp	\
+	        Main.cpp
+
+OBJ_FILES = Randomizer.o		\
+	        Main.cpp
 
 all: compile link
 
 compile:
-	g++ -g -c -std=c++17 Main.cpp
+	g++ -g -c -std=c++17 $(SRC_FILES)
 
 link: 
-	g++ Main.o -L$(RD) -lRandomizer -Wl,-rpath,$(RD) -o $(BD)randomizer
+	g++ $(OBJ_FILES) -o $(BD)randomizer
 
 clean:
-	rm $(BD)randomizer $(BD)*.o $(BD)../bin/*.gch
+	rm $(BD)randomizer *.o $(BD)*.gch
