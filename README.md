@@ -21,13 +21,20 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ## Changelog
 
+### v1.2
+
+- Added method `get_root_seed()`.
+- Added method `get_branching_seed()`.
+- Added method `shuffle(void*, size_t, size_t)` that implements variation of the Fisher-Yates shuffling algorithm.
+- Added wrapper method `shuffle(std::vector<T>&)` that accepts an `std::vector` and invokes `shuffle(void*, size_t, size_t)`.
+
 ### v1.1
 
 - Removed word `random` from generation method names.
 - Update method names for creating and ending Randomizer instances.
-- Updated `gen_string` generate an output string restricted to characters present in a `std::string` dictionary argument.
-- Added variation of `gen_string` to allow dictionary to be of type `const char*`.
-- Added `gen_bool` method.
+- Updated `gen_string(size_t, std::string&);` generate an output string restricted to characters present in a `std::string` dictionary argument.
+- Added variation of `gen_string(size_t, const char*);` to allow dictionary to be of type `const char*`.
+- Added `gen_bool()` method.
 
 ### v1.0
 
