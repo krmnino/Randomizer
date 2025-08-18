@@ -3,12 +3,14 @@
 #define N_ELEMENTS 20
 #define BIG_OBJ_SIZE 0x1000
 #define BYTES_PER_LINE 64
+#define MAX_STR_LEN 8
 
 Randomizer* Randomizer::rnd_ptr = nullptr;
 
 int main(){
     std::string alphanum_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     std::string empty_str = "";
+    std::stringstream buffer;
     struct BigObject{
         uint8_t data[BIG_OBJ_SIZE];
     };
@@ -17,6 +19,7 @@ int main(){
     uint32_t* array_u32;
     uint64_t* array_u64;
     BigObject* array_bigobj;
+    char** array_charptrs;
 
     Randomizer* rnd = Randomizer::get_instance(1);
     if(rnd == nullptr){
@@ -155,7 +158,7 @@ int main(){
     printf("List of uint64_t [BEFORE]: [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%ld", array_u64[i]);
-        if(i < N_ELEMENTS -1){
+        if(i < N_ELEMENTS - 1){
             printf(",");
         }
     }
@@ -172,7 +175,7 @@ int main(){
     delete[] array_u64;
     rnd->root_seed_next();
     
-    // Shuffling array of BigObjs
+    // Shuffling array of BigObjects
     array_bigobj = new BigObject[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
         for(size_t j = 0; j < BIG_OBJ_SIZE; j++){
@@ -208,8 +211,49 @@ int main(){
         }
     }
     printf("\n");
-
     delete[] array_bigobj;
+    rnd->root_seed_next();
+
+    // Shuffling array of pointers to char* objects
+    array_charptrs = new char*[N_ELEMENTS];
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        array_charptrs[i] = new char[MAX_STR_LEN + 1];
+        memset(array_charptrs[i], 0, MAX_STR_LEN + 1);
+        for(size_t j = 0; j < MAX_STR_LEN; j += 2){
+            if(i < 0x10 - 1){
+                buffer << "0" << std::hex << (i + 1);
+            }
+            else{
+                buffer << std::hex << (i + 1);
+            }
+        }
+        for(size_t j = 0; j < MAX_STR_LEN; j++){
+            array_charptrs[i][j] = buffer.str()[j];
+        }
+        buffer.str("");
+        buffer.clear();
+    }
+    printf("List of char** [BEFORE]: [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("\"%s\"", array_charptrs[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->shuffle(array_u64, N_ELEMENTS, sizeof(char*));
+    printf("List of char** [AFTER] : [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("\"%s\"", array_charptrs[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        delete array_charptrs[i];
+    }
+    delete[] array_charptrs;
     
     Randomizer::end_instance();
     return 0;
