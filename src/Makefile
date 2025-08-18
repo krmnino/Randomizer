@@ -1,7 +1,7 @@
 RD = "../res/"
 
 all:
-	g++ -c -fPIC Randomizer.cpp -o $(RD)Randomizer.o
+	g++ -c -Wall -fPIC Randomizer.cpp -o $(RD)Randomizer.o
 	g++ -shared -o $(RD)libRandomizer.so $(RD)Randomizer.o 
 
 clean:
