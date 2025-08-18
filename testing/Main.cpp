@@ -15,6 +15,9 @@ int main(){
         uint8_t data[BIG_OBJ_SIZE];
     };
     typedef struct BigObject BigObject;
+    std::vector<uint8_t> vect_u8;
+    std::vector<uint32_t> vect_u32;
+    std::vector<uint64_t> vect_u64;
     uint8_t* array_u8;
     uint32_t* array_u32;
     uint64_t* array_u64;
@@ -101,20 +104,20 @@ int main(){
     rnd->root_seed_next();
     
     // Shuffling array of uint8_t
-    array_u8 = new uint8_t[20];
+    array_u8 = new uint8_t[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
         array_u8[i] = i + 1;
     }
-    printf("List of uint8_t [BEFORE]: [");
+    printf("Array of uint8_t [BEFORE]: [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u8[i]);
-        if(i < N_ELEMENTS -1){
+        if(i < N_ELEMENTS - 1){
             printf(",");
         }
     }
     printf("]\n");
     rnd->shuffle(array_u8, N_ELEMENTS, sizeof(uint8_t));
-    printf("List of uint8_t [AFTER]:  [");
+    printf("Array of uint8_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u8[i]);
         if(i < N_ELEMENTS - 1){
@@ -126,20 +129,20 @@ int main(){
     rnd->root_seed_next();
     
     // Shuffling array of uint32_t
-    array_u32 = new uint32_t[20];
+    array_u32 = new uint32_t[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
         array_u32[i] = (i + 1) * 2;
     }
-    printf("List of uint32_t [BEFORE]: [");
+    printf("Array of uint32_t [BEFORE]: [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u32[i]);
-        if(i < N_ELEMENTS -1){
+        if(i < N_ELEMENTS - 1){
             printf(",");
         }
     }
     printf("]\n");
     rnd->shuffle(array_u32, N_ELEMENTS, sizeof(uint32_t));
-    printf("List of uint32_t [AFTER]:  [");
+    printf("Array of uint32_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u32[i]);
         if(i < N_ELEMENTS - 1){
@@ -151,11 +154,11 @@ int main(){
     rnd->root_seed_next();
 
     // Shuffling array of uint64_t
-    array_u64 = new uint64_t[20];
+    array_u64 = new uint64_t[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
-        array_u64[i] = (i + 1) * 2;
+        array_u64[i] = (i + 1) * 5;
     }
-    printf("List of uint64_t [BEFORE]: [");
+    printf("Array of uint64_t [BEFORE]: [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%ld", array_u64[i]);
         if(i < N_ELEMENTS - 1){
@@ -164,7 +167,7 @@ int main(){
     }
     printf("]\n");
     rnd->shuffle(array_u64, N_ELEMENTS, sizeof(uint64_t));
-    printf("List of uint64_t [AFTER]:  [");
+    printf("Array of uint64_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%ld", array_u64[i]);
         if(i < N_ELEMENTS - 1){
@@ -182,7 +185,7 @@ int main(){
             array_bigobj[i].data[j] = (uint8_t)i;
         }
     }
-    printf("List of BigObj [BEFORE]:\n");
+    printf("Array of BigObj [BEFORE]:\n");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\n\nElement# %ld\n", i);
         for(size_t j = 0; j < BIG_OBJ_SIZE; j++){
@@ -197,7 +200,7 @@ int main(){
     }
     printf("\n");
     rnd->shuffle(array_bigobj, N_ELEMENTS, sizeof(BigObject));
-    printf("List of BigObj [AFTER]:\n");
+    printf("Array of BigObj [AFTER]:\n");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\n\nElement# %ld\n", i);
         for(size_t j = 0; j < BIG_OBJ_SIZE; j++){
@@ -233,7 +236,7 @@ int main(){
         buffer.str("");
         buffer.clear();
     }
-    printf("List of char** [BEFORE]: [");
+    printf("Array of char** [BEFORE]: [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\"%s\"", array_charptrs[i]);
         if(i < N_ELEMENTS - 1){
@@ -242,7 +245,7 @@ int main(){
     }
     printf("]\n");
     rnd->shuffle(array_u64, N_ELEMENTS, sizeof(char*));
-    printf("List of char** [AFTER] : [");
+    printf("Array of char** [AFTER] : [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\"%s\"", array_charptrs[i]);
         if(i < N_ELEMENTS - 1){
@@ -254,6 +257,79 @@ int main(){
         delete array_charptrs[i];
     }
     delete[] array_charptrs;
+    rnd->root_seed_next();
+
+    // Shuffling vector of uint8_t
+    vect_u8.resize(N_ELEMENTS);
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        vect_u8[i] = i + 1;
+    }
+    printf("Vector of uint8_t [BEFORE]: [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%d", vect_u8[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->shuffle(vect_u8);
+    printf("Vector of uint8_t [AFTER]:  [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%d", vect_u8[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->root_seed_next();
+
+    // Shuffling vector of uint32_t
+    vect_u32.resize(N_ELEMENTS);
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        vect_u32[i] = (i + 1) * 2;
+    }
+    printf("Vector of uint32_t [BEFORE]: [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%d", vect_u32[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->shuffle(vect_u32);
+    printf("Vector of uint32_t [AFTER]:  [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%d", vect_u32[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->root_seed_next();
+
+    // Shuffling vector of uint64_t
+    vect_u64.resize(N_ELEMENTS);
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        vect_u64[i] = (i + 1) * 5;
+    }
+    printf("Vector of uint64_t [BEFORE]: [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%ld", vect_u64[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->shuffle(vect_u64);
+    printf("Vector of uint64_t [AFTER]:  [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%ld", vect_u64[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->root_seed_next();
     
     Randomizer::end_instance();
     return 0;
