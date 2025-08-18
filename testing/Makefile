@@ -5,12 +5,12 @@ SRC_FILES = $(SD)Randomizer.cpp	\
 	        Main.cpp
 
 OBJ_FILES = Randomizer.o		\
-	        Main.cpp
+	        Main.o
 
 all: compile link
 
 compile:
-	g++ -g -c -std=c++17 $(SRC_FILES)
+	g++ -g -c -Wall -std=c++17 $(SRC_FILES)
 
 link: 
 	g++ $(OBJ_FILES) -o $(BD)randomizer
