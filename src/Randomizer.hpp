@@ -5,6 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include <iostream>
+#include <vector>
 class Randomizer{
     private:
     uint32_t root_seed;
@@ -76,6 +77,10 @@ class Randomizer{
         // Keep it in range
         accumulator = (accumulator % (upper - lower + 1)) + lower;
         return accumulator;
+    }
+
+    template<typename T> int shuffle(std::vector<T>& input_vect){
+        return shuffle((void*)input_vect.data(), input_vect.size(), sizeof(T));
     }
 };
 
