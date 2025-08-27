@@ -21,6 +21,11 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ## Changelog
 
+### v1.3
+
+- `shuffle(T, size_t)` does not need to know element size.
+- Use `std::swap` in `shuffle(T, size_t)` for swapping elements in array.
+
 ### v1.2
 
 - Added method `get_root_seed()`.
