@@ -18,9 +18,11 @@ int main(){
     std::vector<uint8_t> vect_u8;
     std::vector<uint32_t> vect_u32;
     std::vector<uint64_t> vect_u64;
+    std::vector<std::string> vect_str;
     uint8_t* array_u8;
     uint32_t* array_u32;
     uint64_t* array_u64;
+    std::string* array_str;
     BigObject* array_bigobj;
     char** array_charptrs;
 
@@ -116,7 +118,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u8, N_ELEMENTS, sizeof(uint8_t));
+    rnd->shuffle(array_u8, N_ELEMENTS);
     printf("Array of uint8_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u8[i]);
@@ -141,7 +143,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u32, N_ELEMENTS, sizeof(uint32_t));
+    rnd->shuffle(array_u32, N_ELEMENTS);
     printf("Array of uint32_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u32[i]);
@@ -166,7 +168,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u64, N_ELEMENTS, sizeof(uint64_t));
+    rnd->shuffle(array_u64, N_ELEMENTS);
     printf("Array of uint64_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%ld", array_u64[i]);
@@ -176,6 +178,31 @@ int main(){
     }
     printf("]\n");
     delete[] array_u64;
+    rnd->root_seed_next();
+
+    // Shuffling array of std::string
+    array_str = new std::string[N_ELEMENTS];
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        array_str[i] = rnd->gen_string(MAX_STR_LEN, alphanum_chars);
+    }
+    printf("Array of std::string [BEFORE]: [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%s", array_str[i].c_str());
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->shuffle(array_str, N_ELEMENTS);
+    printf("Array of std::string [AFTER]:  [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%s", array_str[i].c_str());
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    delete[] array_str;
     rnd->root_seed_next();
     
     // Shuffling array of BigObjects
@@ -199,7 +226,7 @@ int main(){
         }
     }
     printf("\n");
-    rnd->shuffle(array_bigobj, N_ELEMENTS, sizeof(BigObject));
+    rnd->shuffle(array_bigobj, N_ELEMENTS);
     printf("Array of BigObj [AFTER]:\n");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\n\nElement# %ld\n", i);
@@ -244,7 +271,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u64, N_ELEMENTS, sizeof(char*));
+    rnd->shuffle(array_u64, N_ELEMENTS);
     printf("Array of char** [AFTER] : [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\"%s\"", array_charptrs[i]);
@@ -324,6 +351,30 @@ int main(){
     printf("Vector of uint64_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%ld", vect_u64[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->root_seed_next();
+
+    // Shuffling vector of std::string
+    vect_str.resize(N_ELEMENTS);
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        vect_str[i] = rnd->gen_string(MAX_STR_LEN, alphanum_chars);
+    }
+    printf("Vector of std::string [BEFORE]: [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%s", vect_str[i].c_str());
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    rnd->shuffle(vect_str);
+    printf("Vector of std::string [AFTER]:  [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("%s", vect_str[i].c_str());
         if(i < N_ELEMENTS - 1){
             printf(",");
         }
