@@ -81,30 +81,3 @@ double Randomizer::gen_double_not_nan_range(double lower, double upper){
     }
     return ret;
 }
-
-int Randomizer::shuffle(void* array, size_t n_elements, size_t element_size){
-    void* swap1_ptr;
-    void* swap2_ptr;
-    uint8_t* temp;
-    size_t rand_idx;
-    // Check for zeros or nullptr
-    if(array == nullptr || n_elements == 0 || element_size == 0){
-        return -1;
-    }
-    // Nothing to shuffle
-    if(n_elements == 1){
-        return 0;
-    }
-    temp = new uint8_t[element_size];
-    // Variation of the Fisher-Yates shuffling algorithm
-    for(size_t i = 0; i < n_elements - 1; i++){
-        rand_idx = gen_integral_range(i, (n_elements - 1));
-        swap1_ptr = (void*)((uint64_t)array + (i * element_size));
-        swap2_ptr = (void*)((uint64_t)array + (rand_idx * element_size));
-        memcpy((void*)temp, swap1_ptr, element_size);
-        memcpy(swap1_ptr, swap2_ptr, element_size);
-        memcpy(swap2_ptr, (void*)temp, element_size);
-    }
-    delete temp;
-    return 0;
-}

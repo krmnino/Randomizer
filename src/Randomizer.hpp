@@ -79,8 +79,26 @@ class Randomizer{
         return accumulator;
     }
 
+    template<typename T> int shuffle(T* array, size_t n_elements){
+        size_t rand_idx;
+        // Check for zeros or nullptr
+        if(array == nullptr || n_elements == 0){
+            return -1;
+        }
+        // Nothing to shuffle
+        if(n_elements == 1){
+            return 0;
+        }
+        // Variation of the Fisher-Yates shuffling algorithm
+        for(size_t i = 0; i < n_elements - 1; i++){
+            rand_idx = gen_integral_range(i, (n_elements - 1));
+            std::swap(array[i], array[rand_idx]);
+        }
+        return 0;
+    }
+
     template<typename T> int shuffle(std::vector<T>& input_vect){
-        return shuffle((void*)input_vect.data(), input_vect.size(), sizeof(T));
+        return shuffle(input_vect.data(), input_vect.size());
     }
 };
 
