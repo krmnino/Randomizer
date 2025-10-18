@@ -19,19 +19,13 @@ class Randomizer{
     uint32_t c11_minstd_backwards(uint32_t);
     
     public:
-    static Randomizer* get_instance(uint32_t input_seed){
-        if(rnd_ptr == nullptr){
-            rnd_ptr = new Randomizer();
-        }
-        rnd_ptr->root_seed = input_seed;
-        rnd_ptr->branching_seed = rnd_ptr->c11_minstd(rnd_ptr->root_seed);
-        return rnd_ptr;
+    static Randomizer& get_instance(uint32_t input_seed){
+        static Randomizer rnd;
+        rnd.root_seed = input_seed;
+        rnd.branching_seed = rnd.c11_minstd(rnd.root_seed);
+        return rnd;
     } 
-
-    static void end_instance(){
-        delete rnd_ptr;
-    }
-
+    
     void root_seed_next();
     void root_seed_prev();
     uint32_t get_root_seed();
