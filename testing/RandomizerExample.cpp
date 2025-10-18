@@ -26,84 +26,80 @@ int main(){
     BigObject* array_bigobj;
     char** array_charptrs;
 
-    Randomizer* rnd = Randomizer::get_instance(1);
-    if(rnd == nullptr){
-        printf("Could not initialize Randomizer object.\n");
-        return -1;
-    }
+    Randomizer& rnd = Randomizer::get_instance(1);
 
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, rnd->gen_integral<uint8_t>());
+        printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, rnd.gen_integral<uint8_t>());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint16_t #%ld -> %x\n", i + 1, rnd->gen_integral<uint16_t>());
+        printf("Pseudorandom uint16_t #%ld -> %x\n", i + 1, rnd.gen_integral<uint16_t>());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint32_t #%ld -> %x\n", i + 1, rnd->gen_integral<uint32_t>());
+        printf("Pseudorandom uint32_t #%ld -> %x\n", i + 1, rnd.gen_integral<uint32_t>());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint64_t #%ld -> %lx\n", i + 1, rnd->gen_integral<uint64_t>());
+        printf("Pseudorandom uint64_t #%ld -> %lx\n", i + 1, rnd.gen_integral<uint64_t>());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, rnd->gen_integral_range<uint8_t>(0x60, 0xA0));
+        printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, rnd.gen_integral_range<uint8_t>(0x60, 0xA0));
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint16_t #%ld -> %x\n", i + 1, rnd->gen_integral_range<uint16_t>(0x6000, 0xB000));
+        printf("Pseudorandom uint16_t #%ld -> %x\n", i + 1, rnd.gen_integral_range<uint16_t>(0x6000, 0xB000));
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint32_t #%ld -> %x\n", i + 1, rnd->gen_integral_range<uint32_t>(0xABC00000, 0xFA800000));
+        printf("Pseudorandom uint32_t #%ld -> %x\n", i + 1, rnd.gen_integral_range<uint32_t>(0xABC00000, 0xFA800000));
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom uint64_t #%ld -> %lx\n", i + 1, rnd->gen_integral_range<uint64_t>(0x1000000000000000, 0x3300000000000000));
+        printf("Pseudorandom uint64_t #%ld -> %lx\n", i + 1, rnd.gen_integral_range<uint64_t>(0x1000000000000000, 0x3300000000000000));
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        size_t out_str_len = rnd->gen_integral_range<uint32_t>(0, 200);
-        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_string(out_str_len, empty_str).c_str());
+        size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, empty_str).c_str());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        size_t out_str_len = rnd->gen_integral_range<uint32_t>(0, 200);
-        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_string(out_str_len, alphanum_chars).c_str());
+        size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, alphanum_chars).c_str());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        size_t out_str_len = rnd->gen_integral_range<uint32_t>(0, 200);
-        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_string(out_str_len, nullptr).c_str());
+        size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, nullptr).c_str());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        size_t out_str_len = rnd->gen_integral_range<uint32_t>(0, 200);
-        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd->gen_string(out_str_len, alphanum_chars.c_str()).c_str());
+        size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
+        printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, alphanum_chars.c_str()).c_str());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd->gen_double_not_nan());
+        printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd.gen_double_not_nan());
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom range double #%ld -> %lf\n", i + 1, rnd->gen_double_not_nan_range(1.0, 2.0));
+        printf("Pseudorandom range double #%ld -> %lf\n", i + 1, rnd.gen_double_not_nan_range(1.0, 2.0));
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom bool #%ld -> %s\n", i + 1, rnd->gen_bool() ? "true" : "false");
+        printf("Pseudorandom bool #%ld -> %s\n", i + 1, rnd.gen_bool() ? "true" : "false");
     }
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     // Shuffling array of uint8_t
     array_u8 = new uint8_t[N_ELEMENTS];
@@ -118,7 +114,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u8, N_ELEMENTS);
+    rnd.shuffle(array_u8, N_ELEMENTS);
     printf("Array of uint8_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u8[i]);
@@ -128,7 +124,7 @@ int main(){
     }
     printf("]\n");
     delete[] array_u8;
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     // Shuffling array of uint32_t
     array_u32 = new uint32_t[N_ELEMENTS];
@@ -143,7 +139,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u32, N_ELEMENTS);
+    rnd.shuffle(array_u32, N_ELEMENTS);
     printf("Array of uint32_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", array_u32[i]);
@@ -153,7 +149,7 @@ int main(){
     }
     printf("]\n");
     delete[] array_u32;
-    rnd->root_seed_next();
+    rnd.root_seed_next();
 
     // Shuffling array of uint64_t
     array_u64 = new uint64_t[N_ELEMENTS];
@@ -168,7 +164,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u64, N_ELEMENTS);
+    rnd.shuffle(array_u64, N_ELEMENTS);
     printf("Array of uint64_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%ld", array_u64[i]);
@@ -178,12 +174,12 @@ int main(){
     }
     printf("]\n");
     delete[] array_u64;
-    rnd->root_seed_next();
+    rnd.root_seed_next();
 
     // Shuffling array of std::string
     array_str = new std::string[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
-        array_str[i] = rnd->gen_string(MAX_STR_LEN, alphanum_chars);
+        array_str[i] = rnd.gen_string(MAX_STR_LEN, alphanum_chars);
     }
     printf("Array of std::string [BEFORE]: [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -193,7 +189,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_str, N_ELEMENTS);
+    rnd.shuffle(array_str, N_ELEMENTS);
     printf("Array of std::string [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%s", array_str[i].c_str());
@@ -203,7 +199,7 @@ int main(){
     }
     printf("]\n");
     delete[] array_str;
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
     // Shuffling array of BigObjects
     array_bigobj = new BigObject[N_ELEMENTS];
@@ -226,7 +222,7 @@ int main(){
         }
     }
     printf("\n");
-    rnd->shuffle(array_bigobj, N_ELEMENTS);
+    rnd.shuffle(array_bigobj, N_ELEMENTS);
     printf("Array of BigObj [AFTER]:\n");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\n\nElement# %ld\n", i);
@@ -242,7 +238,7 @@ int main(){
     }
     printf("\n");
     delete[] array_bigobj;
-    rnd->root_seed_next();
+    rnd.root_seed_next();
 
     // Shuffling array of pointers to char* objects
     array_charptrs = new char*[N_ELEMENTS];
@@ -271,7 +267,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(array_u64, N_ELEMENTS);
+    rnd.shuffle(array_u64, N_ELEMENTS);
     printf("Array of char** [AFTER] : [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\"%s\"", array_charptrs[i]);
@@ -284,7 +280,7 @@ int main(){
         delete array_charptrs[i];
     }
     delete[] array_charptrs;
-    rnd->root_seed_next();
+    rnd.root_seed_next();
 
     // Shuffling vector of uint8_t
     vect_u8.resize(N_ELEMENTS);
@@ -299,7 +295,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(vect_u8);
+    rnd.shuffle(vect_u8);
     printf("Vector of uint8_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", vect_u8[i]);
@@ -308,7 +304,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->root_seed_next();
+    rnd.root_seed_next();
 
     // Shuffling vector of uint32_t
     vect_u32.resize(N_ELEMENTS);
@@ -323,7 +319,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(vect_u32);
+    rnd.shuffle(vect_u32);
     printf("Vector of uint32_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%d", vect_u32[i]);
@@ -332,7 +328,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->root_seed_next();
+    rnd.root_seed_next();
 
     // Shuffling vector of uint64_t
     vect_u64.resize(N_ELEMENTS);
@@ -347,7 +343,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(vect_u64);
+    rnd.shuffle(vect_u64);
     printf("Vector of uint64_t [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%ld", vect_u64[i]);
@@ -356,12 +352,12 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->root_seed_next();
+    rnd.root_seed_next();
 
     // Shuffling vector of std::string
     vect_str.resize(N_ELEMENTS);
     for(size_t i = 0; i < N_ELEMENTS; i++){
-        vect_str[i] = rnd->gen_string(MAX_STR_LEN, alphanum_chars);
+        vect_str[i] = rnd.gen_string(MAX_STR_LEN, alphanum_chars);
     }
     printf("Vector of std::string [BEFORE]: [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -371,7 +367,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->shuffle(vect_str);
+    rnd.shuffle(vect_str);
     printf("Vector of std::string [AFTER]:  [");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("%s", vect_str[i].c_str());
@@ -380,8 +376,7 @@ int main(){
         }
     }
     printf("]\n");
-    rnd->root_seed_next();
+    rnd.root_seed_next();
     
-    Randomizer::end_instance();
     return 0;
 }
