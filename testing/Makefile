@@ -2,10 +2,10 @@ BD = "../bin/"
 SD = "../src/"
 
 SRC_FILES = $(SD)Randomizer.cpp	\
-	        Main.cpp
+	        RandomizerExample.cpp
 
 OBJ_FILES = Randomizer.o		\
-	        Main.o
+	        RandomizerExample.o
 
 all: compile link
 
