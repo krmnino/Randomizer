@@ -5,9 +5,11 @@
 extern "C"{
 #endif
 
-typedef struct Rnadomizer_C Rnadomizer_C;
+typedef struct Randomizer_C Randomizer_C;
 
-Rnadomizer_C* Rnadomizer_C_get_instance();
+Randomizer_C* Randomizer_C_get_instance();
+void Randomizer_C_root_seed_next(Randomizer_C*);
+void Randomizer_C_root_seed_prev(Randomizer_C*);
 
 #ifdef __cplusplus
 }

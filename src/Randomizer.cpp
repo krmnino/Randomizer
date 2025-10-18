@@ -1,4 +1,5 @@
 #include "Randomizer.hpp"
+#include "Randomizer_C.h"
 
 Randomizer::Randomizer(){
     this->root_seed = 0;
@@ -80,4 +81,20 @@ double Randomizer::gen_double_not_nan_range(double lower, double upper){
         }
     }
     return ret;
+}
+
+///////////////////////////////////////////////////////////////
+// C INTERFACE DEFINITION 
+///////////////////////////////////////////////////////////////
+
+Randomizer_C* Randomizer_C_get_instance(uint32_t input_seed){
+    return reinterpret_cast<Randomizer_C*>(&Randomizer::get_instance(input_seed));
+}
+
+void Randomizer_C_root_seed_next(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->root_seed_next();
+}
+
+void Randomizer_C_root_seed_prev(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->root_seed_prev();
 }
