@@ -1,19 +1,17 @@
 BD = "../bin/"
-SD = "../src/"
+RD = "../res/"
 
-SRC_FILES = $(SD)Randomizer.cpp	\
-	        RandomizerExample.cpp
+all: cpp_version c_version
 
-OBJ_FILES = Randomizer.o		\
-	        RandomizerExample.o
+cpp_version:
+	g++ -g -c -Wall -std=c++17 RandomizerExample.cpp
+	g++ RandomizerExample.o -L$(RD) -lRandomizer -Wl,-rpath,$(RD)	\
+							-o $(BD)randomizer_cpp
 
-all: compile link
-
-compile:
-	g++ -g -c -Wall -std=c++17 $(SRC_FILES)
-
-link: 
-	g++ $(OBJ_FILES) -o $(BD)randomizer
+c_version:
+	gcc -g -c -Wall -std=c17 RandomizerCExample.c
+	gcc RandomizerCExample.o -L$(RD) -lRandomizer -Wl,-rpath,$(RD)	\
+							-o $(BD)randomizer_c
 
 clean:
-	rm $(BD)randomizer *.o $(BD)*.gch
+	rm $(BD)randomizer* *.o $(BD)*.gch
