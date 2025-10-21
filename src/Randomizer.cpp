@@ -98,3 +98,11 @@ void Randomizer_C_root_seed_next(Randomizer_C* rndc){
 void Randomizer_C_root_seed_prev(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->root_seed_prev();
 }
+
+uint64_t Randomizer_C_gen_integral(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_integral<uint64_t>();
+}
+
+uint64_t Randomizer_C_gen_integral_range(Randomizer_C* rndc, uint64_t lower, uint64_t upper){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_integral_range<uint64_t>(lower, upper);
+}
