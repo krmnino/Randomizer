@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "../src/Randomizer.hpp"
 
 #define N_ELEMENTS 20
