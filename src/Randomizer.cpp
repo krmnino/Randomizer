@@ -99,6 +99,10 @@ void Randomizer_C_root_seed_prev(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->root_seed_prev();
 }
 
+bool Randomizer_C_bool_gen_bool(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_bool();
+}
+
 uint64_t Randomizer_C_gen_integral(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_integral<uint64_t>();
 }
