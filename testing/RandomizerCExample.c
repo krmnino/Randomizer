@@ -40,7 +40,7 @@ int main(){
     Randomizer_C_root_seed_next(rnd);
     
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom bool #%ld -> %s\n", i + 1, Randomizer_C_bool_gen_bool(rnd) ? "true" : "false");
+        printf("Pseudorandom bool #%ld -> %s\n", i + 1, Randomizer_C_gen_bool(rnd) ? "true" : "false");
     }
     Randomizer_C_root_seed_next(rnd);
 }
