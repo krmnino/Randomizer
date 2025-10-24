@@ -99,6 +99,14 @@ void Randomizer_C_root_seed_prev(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->root_seed_prev();
 }
 
+uint32_t Randomizer_C_get_root_seed(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->get_root_seed();
+}
+
+uint32_t Randomizer_C_get_branching_seed(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->get_branching_seed();
+}
+
 bool Randomizer_C_gen_bool(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_bool();
 }
