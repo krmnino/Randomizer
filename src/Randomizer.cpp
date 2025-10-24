@@ -103,6 +103,14 @@ bool Randomizer_C_gen_bool(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_bool();
 }
 
+double Randomizer_C_gen_double_not_nan(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_double_not_nan();
+}
+
+double Randomizer_C_gen_double_not_nan_range(Randomizer_C* rndc, double lower, double upper){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_double_not_nan_range(lower, upper);
+}
+
 uint64_t Randomizer_C_gen_integral(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_integral<uint64_t>();
 }
