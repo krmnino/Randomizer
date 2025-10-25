@@ -111,6 +111,15 @@ bool Randomizer_C_gen_bool(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_bool();
 }
 
+int Randomizer_C_gen_string(Randomizer_C* rndc, char* output_str, size_t out_str_length, const char* dictionary){
+    if(output_str == NULL){
+        return -1;
+    }
+    std::string random_str = reinterpret_cast<Randomizer*>(rndc)->gen_string(out_str_length, dictionary);
+    memcpy(output_str, random_str.c_str(), out_str_length);
+    return 0;
+}
+
 double Randomizer_C_gen_double_not_nan(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_double_not_nan();
 }
