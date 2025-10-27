@@ -29,7 +29,10 @@ int main(){
     char** array_charptrs;
 
     Randomizer& rnd = Randomizer::get_instance(1);
+    
+    /*************************************************************************************************************************/
 
+    // Generating integer of different sizes
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, rnd.gen_integral<uint8_t>());
     }
@@ -47,6 +50,9 @@ int main(){
     }
     rnd.root_seed_next();
     
+    /*************************************************************************************************************************/
+    
+    // Generating integer in range of different sizes
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, rnd.gen_integral_range<uint8_t>(0x60, 0xA0));
     }
@@ -64,44 +70,59 @@ int main(){
     }
     rnd.root_seed_next();
     
+    /*************************************************************************************************************************/
+    
+    // Generating string with empty string dictionary
     for(size_t i = 0; i < 20; i++){
         size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
         printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, empty_str).c_str());
     }
     rnd.root_seed_next();
     
+    // Generating string with populated dictionary
     for(size_t i = 0; i < 20; i++){
         size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
         printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, alphanum_chars).c_str());
     }
     rnd.root_seed_next();
     
+    // Generating string with dictionary as nullptr
     for(size_t i = 0; i < 20; i++){
         size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
         printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, nullptr).c_str());
     }
     rnd.root_seed_next();
     
+    // Generating string with dictionary as populated const char*
     for(size_t i = 0; i < 20; i++){
         size_t out_str_len = rnd.gen_integral_range<uint32_t>(0, 200);
         printf("Pseudorandom string #%ld -> Length: %ld -> %s\n", i + 1, out_str_len, rnd.gen_string(out_str_len, alphanum_chars.c_str()).c_str());
     }
     rnd.root_seed_next();
     
+    /*************************************************************************************************************************/
+    
+    // Generating floating point number
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd.gen_double_not_nan());
     }
     rnd.root_seed_next();
     
+    // Generating floating point number in range
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom range double #%ld -> %lf\n", i + 1, rnd.gen_double_not_nan_range(1.0, 2.0));
     }
     rnd.root_seed_next();
     
+    /*************************************************************************************************************************/
+    
+    // Generating boolean
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom bool #%ld -> %s\n", i + 1, rnd.gen_bool() ? "true" : "false");
     }
     rnd.root_seed_next();
+    
+    /*************************************************************************************************************************/
     
     // Shuffling array of uint8_t
     array_u8 = new uint8_t[N_ELEMENTS];
@@ -128,6 +149,8 @@ int main(){
     delete[] array_u8;
     rnd.root_seed_next();
     
+    /*************************************************************************************************************************/
+    
     // Shuffling array of uint32_t
     array_u32 = new uint32_t[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -152,7 +175,9 @@ int main(){
     printf("]\n");
     delete[] array_u32;
     rnd.root_seed_next();
-
+    
+    /*************************************************************************************************************************/
+    
     // Shuffling array of uint64_t
     array_u64 = new uint64_t[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -177,7 +202,9 @@ int main(){
     printf("]\n");
     delete[] array_u64;
     rnd.root_seed_next();
-
+    
+    /*************************************************************************************************************************/
+    
     // Shuffling array of std::string
     array_str = new std::string[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -202,6 +229,8 @@ int main(){
     printf("]\n");
     delete[] array_str;
     rnd.root_seed_next();
+    
+    /*************************************************************************************************************************/
     
     // Shuffling array of BigObjects
     array_bigobj = new BigObject[N_ELEMENTS];
@@ -241,7 +270,9 @@ int main(){
     printf("\n");
     delete[] array_bigobj;
     rnd.root_seed_next();
-
+    
+    /*************************************************************************************************************************/
+    
     // Shuffling array of pointers to char* objects
     array_charptrs = new char*[N_ELEMENTS];
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -283,7 +314,9 @@ int main(){
     }
     delete[] array_charptrs;
     rnd.root_seed_next();
-
+    
+    /*************************************************************************************************************************/
+    
     // Shuffling vector of uint8_t
     vect_u8.resize(N_ELEMENTS);
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -307,7 +340,9 @@ int main(){
     }
     printf("]\n");
     rnd.root_seed_next();
-
+    
+    /*************************************************************************************************************************/
+    
     // Shuffling vector of uint32_t
     vect_u32.resize(N_ELEMENTS);
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -331,7 +366,9 @@ int main(){
     }
     printf("]\n");
     rnd.root_seed_next();
-
+    
+    /*************************************************************************************************************************/
+    
     // Shuffling vector of uint64_t
     vect_u64.resize(N_ELEMENTS);
     for(size_t i = 0; i < N_ELEMENTS; i++){
@@ -356,6 +393,8 @@ int main(){
     printf("]\n");
     rnd.root_seed_next();
 
+    /*************************************************************************************************************************/
+    
     // Shuffling vector of std::string
     vect_str.resize(N_ELEMENTS);
     for(size_t i = 0; i < N_ELEMENTS; i++){
