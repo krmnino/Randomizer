@@ -75,6 +75,34 @@ A small pseudo-random number generation library for reproducible execution paths
 - **Output**: the output string of length `out_str_length`.
 - This is method calls `std::string gen_string(size_t out_str_length, const char* dictionary)` to generate the pseudo-random string of length `out_str_length`.
 
+### `double gen_double_not_nan()`
+
+- **Input**: none
+- **Output**: the output floating-point value.
+- This method allows specifying the data type for the return integer value.
+
+### `double gen_double_not_nan_range(double lower, double upper)`
+
+- **Input**:
+  - `lower`: lower boundary for the range to generate floating-point value.
+  - `upper`: upper boundary for the range to generate floating-point value.
+- **Output**: the output integer value.
+- This method returns a pseudo-random floating-point value within the desired range.
+
+### `template<typename T> T gen_integral()`
+
+- **Input**: none
+- **Output**: the output integer value.
+- This method allows specifying the data type for the return integer value.
+
+### `template<typename T> T gen_integral_range(T lower, T upper)`
+
+- **Input**:
+  - `lower`: lower boundary for the range to generate integer value.
+  - `upper`: upper boundary for the range to generate integer value.
+- **Output**: the output integer value.
+- This method allows specifying the data type for the lower range, upper range, and return integer values.
+
 ## Usage for C Integration
 
 TODO
