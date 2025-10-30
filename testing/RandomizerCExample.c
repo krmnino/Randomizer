@@ -10,6 +10,9 @@ int main(){
 
     Randomizer_C* rnd = Randomizer_C_get_instance(1);
     
+    /*************************************************************************************************************************/
+    
+    // Generating integer of different sizes
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, (uint8_t)Randomizer_C_gen_integral(rnd));
     }
@@ -27,6 +30,9 @@ int main(){
     }
     Randomizer_C_root_seed_next(rnd);
     
+    /*************************************************************************************************************************/
+    
+    // Generating integer in range of different sizes
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom uint8_t #%ld -> %x\n", i + 1, (uint8_t)Randomizer_C_gen_integral_range(rnd, 0x60, 0xA0));
     }
@@ -44,6 +50,9 @@ int main(){
     }
     Randomizer_C_root_seed_next(rnd);
     
+    /*************************************************************************************************************************/
+    
+    // Generating string with dictionary as NULL
     for(size_t i = 0; i < 20; i++){
         size_t out_str_len = Randomizer_C_gen_integral_range(rnd, 0, 200);
         str_buff = calloc(out_str_len + 1, sizeof(char));
@@ -56,6 +65,7 @@ int main(){
     }
     Randomizer_C_root_seed_next(rnd);
     
+    // Generating string with pupulated dictionary
     for(size_t i = 0; i < 20; i++){
         size_t out_str_len = Randomizer_C_gen_integral_range(rnd, 0, 200);
         str_buff = calloc(out_str_len + 1, sizeof(char));
@@ -67,19 +77,28 @@ int main(){
         free(str_buff);
     }
     Randomizer_C_root_seed_next(rnd);
+    
+    /*************************************************************************************************************************/
 
+    // Generating floating point number
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom double #%ld -> %lf\n", i + 1, Randomizer_C_gen_double_not_nan(rnd));
     }
     Randomizer_C_root_seed_next(rnd);
     
+    // Generating floating point number in range
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom range double #%ld -> %lf\n", i + 1, Randomizer_C_gen_double_not_nan_range(rnd, 1.0, 2.0));
     }
     Randomizer_C_root_seed_next(rnd);
 
+    /*************************************************************************************************************************/
+
+    // Generating boolean
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom bool #%ld -> %s\n", i + 1, Randomizer_C_gen_bool(rnd) ? "true" : "false");
     }
     Randomizer_C_root_seed_next(rnd);
+
+    return 0;
 }
