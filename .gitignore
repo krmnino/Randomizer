@@ -4,4 +4,5 @@ src/*.o
 src/.vscode
 testing/*.o
 testing/.vscode
+testing/*.dat
 bin
