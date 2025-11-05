@@ -11,19 +11,15 @@ class Randomizer{
     uint32_t branching_seed;
     static Randomizer* rnd_ptr;
     
-    Randomizer();
-    Randomizer(const Randomizer&) = delete;
-    Randomizer& operator=(const Randomizer&) = delete;
     uint32_t c11_minstd(uint32_t);
     uint32_t c11_minstd_backwards(uint32_t);
     
     public:
-    static Randomizer& get_instance(uint32_t input_seed){
-        static Randomizer rnd;
-        rnd.root_seed = input_seed;
-        rnd.branching_seed = rnd.c11_minstd(rnd.root_seed);
-        return rnd;
-    } 
+    Randomizer();
+    ~Randomizer(){}
+    Randomizer(uint32_t);
+    Randomizer(const Randomizer&);
+    Randomizer& operator=(const Randomizer&);
     
     void root_seed_next();
     void root_seed_prev();

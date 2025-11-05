@@ -11,7 +11,8 @@ extern "C"{
 
 typedef struct Randomizer_C Randomizer_C;
 
-Randomizer_C* Randomizer_C_get_instance(uint32_t);
+Randomizer_C* Randomizer_C_init(uint32_t);
+int Randomizer_C_delete(Randomizer_C*);
 void Randomizer_C_root_seed_next(Randomizer_C*);
 void Randomizer_C_root_seed_prev(Randomizer_C*);
 uint32_t Randomizer_C_get_root_seed(Randomizer_C*);
