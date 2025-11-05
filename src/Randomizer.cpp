@@ -2,8 +2,13 @@
 #include "Randomizer_C.h"
 
 Randomizer::Randomizer(){
-    this->root_seed = 0;
-    this->branching_seed = 0;
+    this->root_seed = 1;
+    this->branching_seed = this->c11_minstd(this->root_seed);
+}
+
+Randomizer::Randomizer(uint32_t input_seed){
+    this->root_seed = input_seed;
+    this->branching_seed = this->c11_minstd(this->root_seed);
 }
 
 uint32_t Randomizer::c11_minstd(uint32_t seed){
@@ -87,8 +92,18 @@ double Randomizer::gen_double_not_nan_range(double lower, double upper){
 // C INTERFACE DEFINITION 
 ///////////////////////////////////////////////////////////////
 
-Randomizer_C* Randomizer_C_get_instance(uint32_t input_seed){
-    return reinterpret_cast<Randomizer_C*>(&Randomizer::get_instance(input_seed));
+Randomizer_C* Randomizer_C_init(uint32_t input_seed){
+    Randomizer* rnd = new Randomizer(input_seed);
+    return reinterpret_cast<Randomizer_C*>(rnd);
+}
+
+int Randomizer_C_delete(Randomizer_C* rndc){
+    if(rndc == nullptr){
+        return -1;
+    }
+    Randomizer* rnd = reinterpret_cast<Randomizer*>(rndc);
+    delete rnd;
+    return 0;
 }
 
 void Randomizer_C_root_seed_next(Randomizer_C* rndc){
