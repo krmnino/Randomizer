@@ -103,6 +103,14 @@ A small pseudo-random number generation library for reproducible execution paths
 - **Output**: the output integer value.
 - This method allows specifying the data type for the lower range, upper range, and return integer values.
 
+### `template<typename T> int shuffle(T* array, size_t n_elements)`
+
+- **Input**:
+  - `array`: a pointer to an array of elements of type `T`.
+  - `n_elements`: number of elements in the array.
+- **Output**: The method returns if the shuffle operation was successful. Otherwise, a value of -1 is returned if the `T* array` argument is `nullptr` or `size_t n_elements` is 0.
+- This method performs the Fisher-Yates shuffling algorithm in place over an array of elements of type `T`.
+
 ## Usage for C Integration
 
 TODO
