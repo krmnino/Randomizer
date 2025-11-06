@@ -19,7 +19,10 @@ int main(){
     uint64_t* array_u64;
     BigObject* array_bigobj;
 
-    Randomizer_C* rnd = Randomizer_C_get_instance(1);
+    Randomizer_C* rnd = Randomizer_C_init(1);
+    if(rnd == NULL){
+        return -1;
+    }
     
     /*************************************************************************************************************************/
     
@@ -233,5 +236,9 @@ int main(){
     free(array_bigobj);
     Randomizer_C_root_seed_next(rnd);
 
+    ret = Randomizer_C_delete(rnd);
+    if(ret != 0){
+        return -1;
+    }
     return 0;
 }
