@@ -28,7 +28,7 @@ int main(){
     BigObject* array_bigobj;
     char** array_charptrs;
 
-    Randomizer& rnd = Randomizer::get_instance(1);
+    Randomizer rnd(1);
     
     /*************************************************************************************************************************/
 
