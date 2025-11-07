@@ -21,12 +21,18 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ## Usage for C++ Integration
 
-### `static Randomizer& get_instance(uint32_t input_seed)`
+### `Randomizer()`
+
+- **Input**: none
+- **Output**: a `Randomizer` instance.
+- Default constructor method that sets the `Randomizer`'s root seed to the value of 1. The MINSTD algorithm is applied to the root seed once to generate the branching seed.
+
+### `Randomizer(uint32_t input_seed)`
 
 - **Input**:
   - `input_seed`: the initial root seed value.
-- **Output**: none
-- Only one instance of the `Randomizer` class is allowed to exist throughout the execution of the program.
+- **Output**: a `Randomizer` instance.
+- A constructor method that takes an initial seed value that is set to `Randomizer`'s root seed. The MINSTD algorithm is applied to the root seed once to generate the branching seed.
 
 ### `void root_seed_next()`
 
@@ -119,9 +125,9 @@ TODO
 
 ### v1.4
 
-- Implemented Meyers' Singleton for `Randomizer` class.
+- Removed singleton implementation for `Randomizer` class allowing multiple instances to be created.
 - Renaming `testing/Main.cpp` to `testing/RandomizerExample.cpp`.
-- Updates to `testing/RandomizerExample.cpp` reflecting changes to support Meyers' Singleton implementation.
+- Updates to `testing/RandomizerExample.cpp` reflecting changes to removal of singleton implementation.
 
 ### v1.3
 
