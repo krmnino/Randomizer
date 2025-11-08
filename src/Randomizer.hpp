@@ -5,6 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include <vector>
+
 class Randomizer{
     private:
     uint32_t root_seed;
@@ -20,7 +21,6 @@ class Randomizer{
     Randomizer(uint32_t);
     Randomizer(const Randomizer&);
     Randomizer& operator=(const Randomizer&);
-    
     void root_seed_next();
     void root_seed_prev();
     uint32_t get_root_seed();
