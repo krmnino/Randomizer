@@ -5,7 +5,7 @@
 #define N_ELEMENTS 20
 #define BIG_OBJ_SIZE 0x1000
 #define BYTES_PER_LINE 64
-#define MAX_STR_LEN 8
+#define MAX_STR_LEN 12
 
 Randomizer* Randomizer::rnd_ptr = nullptr;
 
