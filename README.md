@@ -197,7 +197,7 @@ A small pseudo-random number generation library for reproducible execution paths
 - **Input arguments**:
   - `rndc`: a pointer to a `Randomizer_C*` object.
 - **Output**: the output integer value.
-- This function calls the `Randomizer` method `template<typename T> T gen_integral()`. 
+- This function calls the `Randomizer` method `template<typename T> T gen_integral()`.
 - The returned value is a data type `uint64_t`.
 
 ### `uint64_t Randomizer_C_gen_integral_range(Randomizer_C* rndc, uint64_t lower, uint64_t upper)`
