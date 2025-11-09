@@ -16,8 +16,10 @@ A small pseudo-random number generation library for reproducible execution paths
 
 1. Navigate into `src`.
 2. Issue the command `sh Initialize.sh` to prepare the environment before creating the library file.
-3. Issue the command `make`. This will generate and place the library file in `../res/libRandomizer.so`.
-4. You may now copy the header file `Randomizer.hpp` and `../res/libRandomizer.so` to your own project.
+3. Issue the command `make`. This will generate and place the library file in `res/libRandomizer.so`.
+4. You can now copy the shared object file `res/libRandomizer.so` to a desired location for your project.
+5. If you intend to integrate `ArgParsing` to a C++ project, you should copy the header file `src/Randomizer.hpp` to a desired location for your project.
+6. If you intend to integrate `ArgParsing` to a C project, you should copy the header file `src/Randomizer_C.h` to a desired location for your project.
 
 ## Usage for C++ Integration
 
