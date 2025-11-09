@@ -23,51 +23,49 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ### `Randomizer()`
 
-- **Input**: none
+- **Input arguments**: none
 - **Output**: a `Randomizer` instance.
 - Default constructor method that sets the `Randomizer`'s root seed to the value of 1. The MINSTD algorithm is applied to the root seed once to generate the branching seed.
 
 ### `Randomizer(uint32_t input_seed)`
 
-- **Input**:
+- **Input arguments**:
   - `input_seed`: the initial root seed value.
 - **Output**: a `Randomizer` instance.
 - A constructor method that takes an initial seed value that is set to `Randomizer`'s root seed. The MINSTD algorithm is applied to the root seed once to generate the branching seed.
 
 ### `void root_seed_next()`
 
-- **Input**: none
+- **Input arguments**: none
 - **Output**: none
 - This method applies the MINSTD algorithm to the current root seed to generate the next root seed value.
 
 ### `void root_seed_prev()`
 
-- **Input**: none
+- **Input arguments**: none
 - **Output**: none
 - This method applies the inverse MINSTD algorithm to the current root seed to generate the previous root seed value.
 
 ### `uint32_t get_root_seed()`
 
-- **Input**: none
+- **Input arguments**: none
 - **Output**: current root seed value.
-- Returns the current root seed value in the `Randomizer` object.
 
 ### `uint32_t get_branching_seed()`
 
-- **Input**:
-- **Output**:
-- Returns the current branching seed value in the `Randomizer` object.
+- **Input arguments**:
+- **Output**: current branching seed value.
 - The branching seed value is updated every time by applying the MINSTD algorithm when any of the generator methods are invoked.
 
 ### `bool gen_bool()`
 
-- **Input**: none
+- **Input arguments**: none
 - **Output**: a pseudo-random boolean value.
 - This generator method returns a pseudo-random boolean value.
 
 ### `std::string gen_string(size_t out_str_length, const char* dictionary)`
 
-- **Input**:
+- **Input arguments**:
   - `size_t out_str_length`: the length of the string in number of characters to be generated.
   - `const char* dictionary`: source string to pick characters from.
 - **Output**: the output string of length `out_str_length`.
@@ -75,7 +73,7 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ### `std::string gen_string(size_t out_str_length, std::string& dictionary)`
 
-- **Input**:
+- **Input arguments**:
   - `size_t out_str_length`: the length of the string in number of characters to be generated.
   - `std::string& dictionary`: reference to a source string to pick characters from.
 - **Output**: the output string of length `out_str_length`.
@@ -83,27 +81,27 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ### `double gen_double_not_nan()`
 
-- **Input**: none
+- **Input arguments**: none
 - **Output**: the output floating-point value.
 - This method allows specifying the data type for the return integer value.
 
 ### `double gen_double_not_nan_range(double lower, double upper)`
 
-- **Input**:
+- **Input arguments**:
   - `lower`: lower boundary for the range to generate floating-point value.
   - `upper`: upper boundary for the range to generate floating-point value.
-- **Output**: the output integer value.
+- **Output**: the output floating-point value.
 - This method returns a pseudo-random floating-point value within the desired range.
 
 ### `template<typename T> T gen_integral()`
 
-- **Input**: none
+- **Input arguments**: none
 - **Output**: the output integer value.
 - This method allows specifying the data type for the return integer value.
 
 ### `template<typename T> T gen_integral_range(T lower, T upper)`
 
-- **Input**:
+- **Input arguments**:
   - `lower`: lower boundary for the range to generate integer value.
   - `upper`: upper boundary for the range to generate integer value.
 - **Output**: the output integer value.
@@ -111,21 +109,121 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ### `template<typename T> int shuffle(T* array, size_t n_elements)`
 
-- **Input**:
+- **Input arguments**:
   - `array`: a pointer to an array of elements of type `T`.
   - `n_elements`: number of elements in the array.
-- **Output**: The method returns if the shuffle operation was successful. Otherwise, a value of -1 is returned if the `T* array` argument is `nullptr` or `size_t n_elements` is 0.
+- **Output**: The method returns 0 if the shuffle operation was successful. Otherwise, a value of -1 is returned if the `T* array` argument is `nullptr` or `size_t n_elements` is 0.
 - This method performs the Fisher-Yates shuffling algorithm in place over an array of elements of type `T`.
 
 ## Usage for C Integration
 
-TODO
+### `Randomizer_C* Randomizer_C_init(uint32_t input_seed)`
+
+- **Input arguments**:
+  - `input_seed`: the initial root seed value.
+- **Output**: a pointer to `Randomizer_C` object.
+- This function calls the `Randomizer` constructor method `Randomizer(uint32_t input_seed)`.
+
+### `int Randomizer_C_delete(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: returns 0 if the delete operation was successful. Returns -1 if `rndc` is `NULL`.
+- This method calls the `Randomizer`'s destructor method.
+
+### `void Randomizer_C_root_seed_next(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: none
+- This function calls the `Randomizer` method `void root_seed_next()`.
+
+### `void Randomizer_C_root_seed_prev(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: none
+- This function calls the `Randomizer` method `void root_seed_prev()`.
+
+### `uint32_t Randomizer_C_get_root_seed(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: current root seed value.
+- This function calls the `Randomizer` method `uint32_t get_root_seed()`.
+
+### `uint32_t Randomizer_C_get_branching_seed(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: current branching seed value.
+- This function calls the `Randomizer` method `uint32_t get_branching_seed()`.
+
+### `bool Randomizer_C_gen_bool(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: a pseudo-random boolean value.
+- This function calls the `Randomizer` method `bool gen_bool()`.
+
+### `int Randomizer_C_gen_string(Randomizer_C* rndc, char* output_str, size_t out_str_length, const char* dictionary)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+  - `output_str`: a pointer to the buffer to be populated with pseudo-random string.
+  - `size_t out_str_length`: the length of the string in number of characters to be generated.
+  - `const char* dictionary`: source string to pick characters from.
+- **Output**: return 0 if successful generating a pseudo-random string given the arguments provided. Return -1 if `output_str` is a `NULL` pointer.
+- This function calls the `Randomizer` method `std::string gen_string(size_t out_str_length, const char* dictionary)`.
+
+### `double Randomizer_C_gen_double_not_nan(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: the output floating-point value.
+- This function calls the `Randomizer` method `double gen_double_not_nan()`.
+
+### `double Randomizer_C_gen_double_not_nan_range(Randomizer_C* rndc, double lower, double upper)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+  - `lower`: lower boundary for the range to generate floating-point value.
+  - `upper`: upper boundary for the range to generate floating-point value.
+- **Output**: the output floating-point value.
+- This function calls the `Randomizer` method `double gen_double_not_nan_range(double lower, double upper)`.
+
+### `uint64_t Randomizer_C_gen_integral(Randomizer_C* rndc)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+- **Output**: the output integer value.
+- This function calls the `Randomizer` method `template<typename T> T gen_integral()`. 
+- The returned value is a data type `uint64_t`.
+
+### `uint64_t Randomizer_C_gen_integral_range(Randomizer_C* rndc, uint64_t lower, uint64_t upper)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+  - `lower`: lower boundary for the range to generate integer value.
+  - `upper`: upper boundary for the range to generate integer value.
+- **Output**: the output integer value.
+- This function calls the `Randomizer` method `template<typename T> T gen_integral_range(T lower, T upper)`.
+- The returned value is a data type `uint64_t`.
+
+### `int Randomizer_C_shuffle(Randomizer_C* rndc, void* array, size_t n_elements, size_t elem_size)`
+
+- **Input arguments**:
+  - `rndc`: a pointer to a `Randomizer_C*` object.
+  - `array`: a pointer to an array of elements.
+  - `n_elements`: number of elements in the array.
+- **Output**: The function returns 0 if the shuffle operation was successful. Otherwise, a value of -1 is returned if the `T* array` argument is `nullptr` or `size_t n_elements` is 0.
+- This function implements the Fisher-Yates shuffling algorithm and does not call the `Randomizer` C++ shuffle method to perform this operation.
 
 ## Changelog
 
 ### v1.4
 
-- Removed singleton implementation for `Randomizer` class allowing multiple instances to be created.
+- Removed singleton implementation for `Randomizer` class allowing multiple instances to be created in a program.
 - Renaming `testing/Main.cpp` to `testing/RandomizerExample.cpp`.
 - Updates to `testing/RandomizerExample.cpp` reflecting changes to removal of singleton implementation.
 
