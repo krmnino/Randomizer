@@ -5,6 +5,7 @@
 
 #define N_ELEMENTS 20
 #define BIG_OBJ_SIZE 0x1000
+#define MAX_STR_LEN 12
 
 int main(){
     const char* alphanum_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -18,6 +19,7 @@ int main(){
     uint32_t* array_u32;
     uint64_t* array_u64;
     BigObject* array_bigobj;
+    char** array_charptrs;
 
     Randomizer_C* rnd = Randomizer_C_init(1);
     if(rnd == NULL){
@@ -218,7 +220,7 @@ int main(){
         }
     }
     printf("\n");
-    Randomizer_C_shuffle(rnd, array_bigobj, N_ELEMENTS, sizeof(BigObject));
+    Randomizer_C_shuffle(rnd, (void*)array_bigobj, N_ELEMENTS, sizeof(BigObject));
     printf("Array of BigObj [AFTER]:\n");
     for(size_t i = 0; i < N_ELEMENTS; i++){
         printf("\n\nElement# %ld\n", i);
@@ -235,7 +237,36 @@ int main(){
     printf("\n");
     free(array_bigobj);
     Randomizer_C_root_seed_next(rnd);
-
+    
+    /*************************************************************************************************************************/
+    
+    // Shuffling array of pointers to char* objects
+    array_charptrs = (char**)malloc(sizeof(char*) * N_ELEMENTS);
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        array_charptrs[i] = (char*)malloc((sizeof(char) * MAX_STR_LEN) + 1);
+        memset(array_charptrs[i], 0, MAX_STR_LEN + 1);
+        Randomizer_C_gen_string(rnd, array_charptrs[i], MAX_STR_LEN, alphanum_chars);
+    }
+    printf("Array of char** [BEFORE]: [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("\"%s\"", array_charptrs[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    Randomizer_C_shuffle(rnd, (void*)array_charptrs, N_ELEMENTS, sizeof(char*));
+    printf("Array of char** [AFTER] : [");
+    for(size_t i = 0; i < N_ELEMENTS; i++){
+        printf("\"%s\"", array_charptrs[i]);
+        if(i < N_ELEMENTS - 1){
+            printf(",");
+        }
+    }
+    printf("]\n");
+    free(array_charptrs);
+    Randomizer_C_root_seed_next(rnd);
+    
     ret = Randomizer_C_delete(rnd);
     if(ret != 0){
         return -1;
