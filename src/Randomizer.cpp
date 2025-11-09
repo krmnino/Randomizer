@@ -93,16 +93,14 @@ double Randomizer::gen_double_not_nan_range(double lower, double upper){
 ///////////////////////////////////////////////////////////////
 
 Randomizer_C* Randomizer_C_init(uint32_t input_seed){
-    Randomizer* rnd = new Randomizer(input_seed);
-    return reinterpret_cast<Randomizer_C*>(rnd);
+    return reinterpret_cast<Randomizer_C*>(new Randomizer(input_seed));
 }
 
 int Randomizer_C_delete(Randomizer_C* rndc){
     if(rndc == nullptr){
         return -1;
     }
-    Randomizer* rnd = reinterpret_cast<Randomizer*>(rndc);
-    delete rnd;
+    delete reinterpret_cast<Randomizer*>(rndc);
     return 0;
 }
 
