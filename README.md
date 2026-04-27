@@ -223,6 +223,12 @@ A small pseudo-random number generation library for reproducible execution paths
 
 ## Changelog
 
+### v1.4.1
+
+- Adding `#include <stdlib.h>` to `Randomizer_C.h`.
+- Miscellaneous fixes and code clean up.
+
+
 ### v1.4
 
 - Removed singleton implementation for `Randomizer` class allowing multiple instances to be created in a program.
