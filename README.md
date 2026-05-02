@@ -227,7 +227,7 @@ A small pseudo-random number generation library for reproducible execution paths
 
 - Adding `#include <stdlib.h>` to `Randomizer_C.h`.
 - Miscellaneous fixes and code clean up.
-
+- Move `int Randomizer_C_shuffle(Randomizer_C*, void*, size_t, size_t)` definition to `Randomizer.cpp`.
 
 ### v1.4
 
