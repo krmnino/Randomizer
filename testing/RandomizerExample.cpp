@@ -104,7 +104,7 @@ int main(){
     
     // Generating floating point number
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd.gen_double_not_nan());
+        printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd.gen_double());
     }
     rnd.root_seed_next();
     
