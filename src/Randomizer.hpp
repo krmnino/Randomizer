@@ -6,6 +6,10 @@
 #include <sstream>
 #include <vector>
 
+
+#define NAN 0x7FF0000000000000
+
+
 class Randomizer{
     private:
     uint32_t root_seed;
@@ -28,7 +32,7 @@ class Randomizer{
     bool gen_bool();
     std::string gen_string(size_t, const char*);
     std::string gen_string(size_t, std::string&);
-    double gen_double_not_nan();
+    double gen_double();
     double gen_double_not_nan_range(double, double);
     int shuffle(void*, size_t, size_t);
 
