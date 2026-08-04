@@ -149,7 +149,7 @@ int Randomizer_C_gen_string(Randomizer_C* rndc, char* output_str, size_t out_str
 }
 
 
-double Randomizer_C_gen_double_not_nan(Randomizer_C* rndc){
+double Randomizer_C_gen_double(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_double();
 }
 

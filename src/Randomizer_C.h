@@ -20,7 +20,7 @@ uint32_t Randomizer_C_get_root_seed(Randomizer_C*);
 uint32_t Randomizer_C_get_branching_seed(Randomizer_C*);
 bool Randomizer_C_gen_bool(Randomizer_C*);
 int Randomizer_C_gen_string(Randomizer_C*, char*, size_t, const char*);
-double Randomizer_C_gen_double_not_nan(Randomizer_C*);
+double Randomizer_C_gen_double(Randomizer_C*);
 double Randomizer_C_gen_double_not_nan_range(Randomizer_C*, double, double);
 uint64_t Randomizer_C_gen_integral(Randomizer_C*);
 uint64_t Randomizer_C_gen_integral_range(Randomizer_C*, uint64_t, uint64_t);
