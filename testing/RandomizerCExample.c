@@ -98,7 +98,7 @@ int main(){
 
     // Generating floating point number
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom double #%ld -> %lf\n", i + 1, Randomizer_C_gen_double_not_nan(rnd));
+        printf("Pseudorandom double #%ld -> %lf\n", i + 1, Randomizer_C_gen_double(rnd));
     }
     Randomizer_C_root_seed_next(rnd);
     
