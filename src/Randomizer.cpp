@@ -14,7 +14,9 @@ Randomizer::Randomizer(uint32_t input_seed){
 
 
 uint32_t Randomizer::c11_minstd(uint32_t seed){
-    int32_t ret = (48271 * (seed % 44488)) - (3399 * (seed / 44488));
+    int32_t ret;
+
+    ret = (48271 * (seed % 44488)) - (3399 * (seed / 44488));
     return ret < 0 ? ret + (0x80000000 - 1) : ret;
 }
 
@@ -52,7 +54,8 @@ bool Randomizer::gen_bool(){
 
 
 std::string Randomizer::gen_string(size_t out_str_length, const char* dictionary){
-    const char* default_ascii_dict =  "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    const char* default_ascii_dict = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    
     if(dictionary == nullptr || out_str_length == 0 || strlen(dictionary) == 0){
         dictionary = default_ascii_dict;
     }
@@ -166,6 +169,7 @@ uint64_t Randomizer_C_gen_integral_range(Randomizer_C* rndc, uint64_t lower, uin
 
 int Randomizer_C_shuffle(Randomizer_C* rndc, void* array, size_t n_elements, size_t elem_size){
     size_t rand_idx;
+
     // Check for zeros or NULL
     if(array == NULL || n_elements == 0 || elem_size == 0){
         return -1;
