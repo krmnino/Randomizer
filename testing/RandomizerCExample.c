@@ -3,9 +3,11 @@
 
 #include "../src/Randomizer_C.h"
 
+
 #define N_ELEMENTS 20
 #define BIG_OBJ_SIZE 0x1000
 #define MAX_STR_LEN 12
+
 
 int main(){
     const char* alphanum_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -98,13 +100,13 @@ int main(){
 
     // Generating floating point number
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom double #%ld -> %lf\n", i + 1, Randomizer_C_gen_double(rnd));
+        printf("Pseudorandom float #%ld -> %f\n", i + 1, Randomizer_C_gen_float(rnd));
     }
     Randomizer_C_root_seed_next(rnd);
     
     // Generating floating point number in range
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom range double #%ld -> %lf\n", i + 1, Randomizer_C_gen_double_not_nan_range(rnd, 1.0, 2.0));
+        printf("Pseudorandom range float #%ld -> %f\n", i + 1, Randomizer_C_gen_float_range(rnd, 44.0, 66.0));
     }
     Randomizer_C_root_seed_next(rnd);
 
