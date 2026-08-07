@@ -69,31 +69,26 @@ std::string Randomizer::gen_string(size_t out_str_length, std::string& dictionar
 }
 
 
-double Randomizer::gen_double(){
+float Randomizer::gen_float(){
     union{
-        uint64_t rand_buff_u64;
-        double rand_buff_double;
+        uint32_t rand_buff_u32;
+        float rand_buff_float;
     } buff;
-    uint64_t new_exp_mask;
-    buff.rand_buff_u64 = this->gen_integral<uint64_t>();
-    if((buff.rand_buff_u64 & NAN) == NAN){
-        new_exp_mask = this->gen_integral_range<uint64_t>(0, 0x7fe);
-        new_exp_mask = (new_exp_mask << 52) || 0xFFFFFFFFFFFFF;
-        buff.rand_buff_u64 = buff.rand_buff_u64 & new_exp_mask;
-    }
-    return buff.rand_buff_double;
+    buff.rand_buff_u32 = this->gen_integral<uint32_t>();
+    buff.rand_buff_u32 = (buff.rand_buff_u32 & 0x00FFFFFF) | 0x3F800000;
+    buff.rand_buff_float = buff.rand_buff_float - 1.0f;
+    return buff.rand_buff_float;
 }
 
 
-double Randomizer::gen_double_not_nan_range(double lower, double upper){
-    double ret;
-    while (true){
-        ret = gen_double();
-        if(lower <= ret && ret <= upper){
-            break;
-        }
-    }
-    return ret;
+float Randomizer::gen_float_range(float lower, float upper){
+    union{
+        uint32_t rand_buff_u32;
+        float rand_buff_float;
+    } buff;
+    buff.rand_buff_float = this->gen_float();
+    buff.rand_buff_float = lower + (buff.rand_buff_float * (upper - lower));
+    return buff.rand_buff_float;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -149,13 +144,13 @@ int Randomizer_C_gen_string(Randomizer_C* rndc, char* output_str, size_t out_str
 }
 
 
-double Randomizer_C_gen_double(Randomizer_C* rndc){
-    return reinterpret_cast<Randomizer*>(rndc)->gen_double();
+float Randomizer_C_gen_float(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_float();
 }
 
 
-double Randomizer_C_gen_double_not_nan_range(Randomizer_C* rndc, double lower, double upper){
-    return reinterpret_cast<Randomizer*>(rndc)->gen_double_not_nan_range(lower, upper);
+float Randomizer_C_gen_float_range(Randomizer_C* rndc, float lower, float upper){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_float_range(lower, upper);
 }
 
 
