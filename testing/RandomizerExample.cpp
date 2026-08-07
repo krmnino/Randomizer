@@ -2,10 +2,12 @@
 
 #include "../src/Randomizer.hpp"
 
+
 #define N_ELEMENTS 20
 #define BIG_OBJ_SIZE 0x1000
 #define BYTES_PER_LINE 64
 #define MAX_STR_LEN 12
+
 
 Randomizer* Randomizer::rnd_ptr = nullptr;
 
@@ -104,13 +106,13 @@ int main(){
     
     // Generating floating point number
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd.gen_double());
+        printf("Pseudorandom float #%ld -> %f\n", i + 1, rnd.gen_float());
     }
     rnd.root_seed_next();
     
     // Generating floating point number in range
     for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom range double #%ld -> %lf\n", i + 1, rnd.gen_double_not_nan_range(1.0, 2.0));
+        printf("Pseudorandom range float #%ld -> %lf\n", i + 1, rnd.gen_float_range(44.0, 66.0));
     }
     rnd.root_seed_next();
     
