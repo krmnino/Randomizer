@@ -5,6 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include <vector>
+#include <iostream>
 
 
 class Randomizer{
@@ -33,6 +34,7 @@ class Randomizer{
     float gen_float_range(float, float);
     int shuffle(void*, size_t, size_t);
 
+
     template<typename T> T gen_integral(){
         size_t input_size = sizeof(T);
         T accumulator = 0;
@@ -46,6 +48,7 @@ class Randomizer{
         }
         return accumulator;
     }
+
 
     template<typename T> T gen_integral_range(T lower, T upper){
         size_t input_size = sizeof(T);
@@ -69,8 +72,10 @@ class Randomizer{
         return accumulator;
     }
 
+
     template<typename T> int shuffle(T* array, size_t n_elements){
         size_t rand_idx;
+
         // Check for zeros or nullptr
         if(array == nullptr || n_elements == 0){
             return -1;
@@ -87,8 +92,35 @@ class Randomizer{
         return 0;
     }
 
+
     template<typename T> int shuffle(std::vector<T>& input_vect){
         return shuffle(input_vect.data(), input_vect.size());
+    }
+
+
+    template<typename T> T gen_float2(){
+        union{
+            uint32_t as_int;
+            float as_float;
+        } buff32;
+        union{
+            uint64_t as_int;
+            double as_double;
+        } buff64;
+        
+        if constexpr (std::is_same_v<T, float>){
+            buff32.as_int = this->gen_integral<uint32_t>();
+            buff32.as_int = (buff32.as_int & 0x00FFFFFF) | 0x3F800000;
+            buff32.as_float = buff32.as_float - 1.0f;
+            return buff32.as_float;
+        }
+        else if constexpr (std::is_same_v<T, double>){
+            buff64.as_int = this->gen_integral<uint64_t>();
+            buff64.as_int = (buff64.as_int & 0x000FFFFFFFFFFFFF) | 0x3FF0000000000000;
+            buff64.as_double = buff64.as_double - 1.0f;
+            return buff64.as_double;
+        }
+        return 0.0f;
     }
 };
 
