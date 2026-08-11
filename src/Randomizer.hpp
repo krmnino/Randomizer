@@ -98,7 +98,7 @@ class Randomizer{
     }
 
 
-    template<typename T> T gen_float2(){
+    template<typename T> T gen_float(){
         union{
             uint32_t as_int;
             float as_float;
@@ -124,16 +124,16 @@ class Randomizer{
     }
     
     
-    template<typename T> T gen_float_range2(T lower, T upper){
+    template<typename T> T gen_float_range(T lower, T upper){
         float rand_float;
         double rand_double;
         if constexpr (std::is_same_v<T, float>){
-            rand_float = this->gen_float2<float>();
+            rand_float = this->gen_float<float>();
             rand_float = lower + (rand_float * (upper - lower));
             return rand_float;
         }
         else if constexpr (std::is_same_v<T, double>){
-            rand_double = this->gen_float2<double>();
+            rand_double = this->gen_float<double>();
             rand_double = lower + (rand_double * (upper - lower));
             return rand_double;
         }

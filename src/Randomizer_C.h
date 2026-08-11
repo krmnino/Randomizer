@@ -22,6 +22,8 @@ bool Randomizer_C_gen_bool(Randomizer_C*);
 int Randomizer_C_gen_string(Randomizer_C*, char*, size_t, const char*);
 float Randomizer_C_gen_float(Randomizer_C*);
 float Randomizer_C_gen_float_range(Randomizer_C*, float, float);
+double Randomizer_C_gen_double(Randomizer_C*);
+double Randomizer_C_gen_double_range(Randomizer_C*, double, double);
 uint64_t Randomizer_C_gen_integral(Randomizer_C*);
 uint64_t Randomizer_C_gen_integral_range(Randomizer_C*, uint64_t, uint64_t);
 int Randomizer_C_shuffle(Randomizer_C*, void*, size_t, size_t);
