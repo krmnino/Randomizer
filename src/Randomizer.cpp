@@ -134,6 +134,16 @@ float Randomizer_C_gen_float_range(Randomizer_C* rndc, float lower, float upper)
 }
 
 
+double Randomizer_C_gen_double(Randomizer_C* rndc){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_float<float>();
+}
+
+
+double Randomizer_C_gen_double_range(Randomizer_C* rndc, double lower, double upper){
+    return reinterpret_cast<Randomizer*>(rndc)->gen_float_range<double>(lower, upper);
+}
+
+
 uint64_t Randomizer_C_gen_integral(Randomizer_C* rndc){
     return reinterpret_cast<Randomizer*>(rndc)->gen_integral<uint64_t>();
 }
