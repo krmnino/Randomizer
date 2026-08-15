@@ -111,6 +111,20 @@ int main(){
     Randomizer_C_root_seed_next(rnd);
 
     /*************************************************************************************************************************/
+
+    // Generating double floating point number
+    for(size_t i = 0; i < 20; i++){
+        printf("Pseudorandom double #%ld -> %f\n", i + 1, Randomizer_C_gen_double(rnd));
+    }
+    Randomizer_C_root_seed_next(rnd);
+    
+    // Generating double floating point number in range
+    for(size_t i = 0; i < 20; i++){
+        printf("Pseudorandom range double #%ld -> %f\n", i + 1, Randomizer_C_gen_double_range(rnd, 44.0, 66.0));
+    }
+    Randomizer_C_root_seed_next(rnd);
+
+    /*************************************************************************************************************************/
     
     // Generating boolean
     for(size_t i = 0; i < 20; i++){
