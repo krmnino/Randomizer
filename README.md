@@ -81,19 +81,19 @@ A small pseudo-random number generation library for reproducible execution paths
 - **Output**: the output string of length `out_str_length`.
 - This is method calls `std::string gen_string(size_t out_str_length, const char* dictionary)` to generate the pseudo-random string of length `out_str_length`.
 
-### `double gen_double_not_nan()`
+### ` template<typename T> T gen_float()`
 
 - **Input arguments**: none
-- **Output**: the output floating-point value.
-- This method allows specifying the data type for the return integer value.
+- **Output**: a floating-point value of type `<T>` within the range [0.0, 1.0).
+- This method allows specifying the data type for the return floating-point value.
 
-### `double gen_double_not_nan_range(double lower, double upper)`
+### `template<typename T> T gen_float_range(T lower, T upper)`
 
 - **Input arguments**:
-  - `lower`: lower boundary for the range to generate floating-point value.
-  - `upper`: upper boundary for the range to generate floating-point value.
-- **Output**: the output floating-point value.
-- This method returns a pseudo-random floating-point value within the desired range.
+  - `lower`: lower boundary for the range to generate floating-point value of type `<T>`.
+  - `upper`: upper boundary for the range to generate floating-point value of type `<T>`.
+- **Output**: the output floating-point value of type `<T>` within the range specified by the method arguments.
+- This method returns a pseudo-random floating-point value of type `<T>` within the desired range.
 
 ### `template<typename T> T gen_integral()`
 
@@ -178,21 +178,21 @@ A small pseudo-random number generation library for reproducible execution paths
 - **Output**: return 0 if successful generating a pseudo-random string given the arguments provided. Return -1 if `output_str` is a `NULL` pointer.
 - This function calls the `Randomizer` method `std::string gen_string(size_t out_str_length, const char* dictionary)`.
 
-### `double Randomizer_C_gen_double_not_nan(Randomizer_C* rndc)`
+### `float Randomizer_C_gen_float(Randomizer_C*)`
 
 - **Input arguments**:
   - `rndc`: a pointer to a `Randomizer_C*` object.
 - **Output**: the output floating-point value.
-- This function calls the `Randomizer` method `double gen_double_not_nan()`.
+- This function calls the `Randomizer` method `float gen_float()`.
 
-### `double Randomizer_C_gen_double_not_nan_range(Randomizer_C* rndc, double lower, double upper)`
+### `float Randomizer_C_gen_float_range(Randomizer_C* rndc, float lower, float upper)`
 
 - **Input arguments**:
   - `rndc`: a pointer to a `Randomizer_C*` object.
   - `lower`: lower boundary for the range to generate floating-point value.
   - `upper`: upper boundary for the range to generate floating-point value.
 - **Output**: the output floating-point value.
-- This function calls the `Randomizer` method `double gen_double_not_nan_range(double lower, double upper)`.
+- This function calls the `Randomizer` method `float gen_float_range(float, float)`.
 
 ### `uint64_t Randomizer_C_gen_integral(Randomizer_C* rndc)`
 
@@ -222,6 +222,14 @@ A small pseudo-random number generation library for reproducible execution paths
 - This function implements the Fisher-Yates shuffling algorithm and does not call the `Randomizer` C++ shuffle method to perform this operation.
 
 ## Changelog
+
+### v1.5
+
+- Refactored `double gen_double_not_nan()` to `float gen_float()`.
+- Refactored `double gen_double_not_nan_range(double lower, double upper)` to `float gen_float_range(float, float)`.
+- Refactored `double Randomizer_C_gen_double_not_nan(Randomizer_C*)` to `float Randomizer_C_gen_float(Randomizer_C*)`.
+- Refactored `double Randomizer_C_gen_double_not_nan_range(Randomizer_C*, double, double)` to `float Randomizer_C_gen_float_range(Randomizer_C*, float, float)`.
+- `gen_float()` generates by default a float value within the range [0.0, 1.0).
 
 ### v1.4.1
 
