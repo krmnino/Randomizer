@@ -110,15 +110,15 @@ int main(){
     }
     rnd.root_seed_next();
     
-    // Generating double floating point number
-    for(size_t i = 0; i < 20; i++){
-        printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd.gen_float<double>());
-    }
-    rnd.root_seed_next();
-    
     // Generating floating point number in range
     for(size_t i = 0; i < 20; i++){
         printf("Pseudorandom range float #%ld -> %lf\n", i + 1, rnd.gen_float_range<float>(44.0, 66.0));
+    }
+    rnd.root_seed_next();
+
+    // Generating double floating point number
+    for(size_t i = 0; i < 20; i++){
+        printf("Pseudorandom double #%ld -> %lf\n", i + 1, rnd.gen_float<double>());
     }
     rnd.root_seed_next();
 
